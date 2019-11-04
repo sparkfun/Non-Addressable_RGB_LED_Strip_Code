@@ -126,61 +126,106 @@ void setup() {
 void loop()
 {
   //used to visually check when Arduino is initialized
+#if DEBUG
+  Serial.println("RED");
+#endif
   redON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("ORANGE");
+#endif
   orangeON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("YELLOW");
+#endif
   yellowON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("CHARTRUESE");
+#endif
   chartrueseON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("GREEN");
+#endif
   greenON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("SPRING GREEN");
+#endif
   springGreenON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("CYAN");
+#endif
   cyanON();
   show_RGB();
   delay(blinkRate);
-
+  
+#if DEBUG
+  Serial.println("AZURE");
+#endif
   azureON();
   show_RGB();
   delay(blinkRate);
 
+
+#if DEBUG
+  Serial.println("BLUE");
+#endif
   blueON();
   show_RGB();
   delay(blinkRate);
+
+#if DEBUG
+  Serial.println("VIOLET");
+#endif
 
   violetON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("MAGENTA");
+#endif
   magentaON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("ROSE");
+#endif
   roseON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("WHITE");
+#endif
   whiteON();
   show_RGB();
   delay(blinkRate);
 
+#if DEBUG
+  Serial.println("OFF");
+#endif
   allOFF();
   show_RGB();
   delay(blinkRate);
+  
 }//end loop
 
 

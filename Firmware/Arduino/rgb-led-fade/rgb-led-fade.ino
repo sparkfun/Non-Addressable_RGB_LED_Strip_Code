@@ -329,6 +329,61 @@ void loop()
       allOFF();
       break;
   }
+
+
+
+#if DEBUG
+  Serial.print("Color Fading = ");
+  if (colorMode == 1) {
+    Serial.print("RED");
+  }
+  else if (colorMode == 2) {
+    Serial.print("ORANGE");
+  }
+  else if (colorMode == 3) {
+    Serial.print("YELLOW");
+  }
+  else if (colorMode == 4) {
+    Serial.print("CHARTRUESE");
+  }
+  else if (colorMode == 5) {
+    Serial.print("GREEN");
+  }
+  else if (colorMode == 6) {
+    Serial.print("SPRING GREEN");
+  }
+  else if (colorMode == 7) {
+    Serial.print("CYAN");
+  }
+  else if (colorMode == 8) {
+    Serial.print("AZURE");
+  }
+  else if (colorMode == 9) {
+    Serial.print("BLUE");
+  }
+  else if (colorMode == 10) {
+    Serial.print("VIOLET");
+  }
+  else if (colorMode == 11) {
+    Serial.print("MAGENTA");
+  }
+  else if (colorMode == 12) {
+    Serial.print("ROSE");
+  }
+  else if (colorMode == 13) {
+    Serial.print("WHITE");
+  }
+  else {
+    Serial.print("OFF");
+  }
+  Serial.print(" | Brightness % = ");
+  Serial.print(brightness_LED * 100);
+  Serial.print("%");
+
+  Serial.print(" | Fade Val Before Calc= ");
+  Serial.println(current_FadeVal);
+#endif
+
   show_RGB();
   delay(fadeDelay);
 
