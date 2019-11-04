@@ -141,21 +141,15 @@ void loop()
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE RED ==========
+
     case 2://FADE ORANGE
       redValue = current_FadeVal;
       greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (redValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -171,27 +165,23 @@ void loop()
       //Serial.print("Green Value =");
       //Serial.println( int((current_FadeVal * 0.498) * brightness_LED));
       break;
+    //========== END FADE ORANGE ==========
+
     case 3://FADE YELLOW
       redValue = current_FadeVal;
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE ORANGE ==========
+
     case 4://FADE CHARTRUESE
       redValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (greenValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -200,27 +190,23 @@ void loop()
         greenValue = 0;
       }
       break;
+    //========== END FADE CHARTRUESE ==========
+
     case 5://FADE GREEN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE GREEN ==========
+
     case 6://FADE SPRING GREEN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (greenValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -229,27 +215,23 @@ void loop()
         greenValue = 0;
       }
       break;
+    //========== END FADE SPRING GREEN ==========
+
     case 7://FADE CYAN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE CYAN ==========
+
     case 8://FADE AZURE
       redValue = 0;
       greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (blueValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -258,27 +240,23 @@ void loop()
         blueValue = 0;
       }
       break;
+    //========== END FADE AZURE ==========
+
     case 9://FADE BLUE
       redValue = 0;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE BLUE ==========
+
     case 10://FADE VIOLET
       redValue = current_FadeVal * 0.498;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);// 128/255 = ~0.498039
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (blueValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -287,27 +265,23 @@ void loop()
         blueValue = 0;
       }
       break;
+    //========== END FADE VIOLET ==========
+
     case 11://FADE MAGENTA
       redValue = current_FadeVal;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE MAGENTA ==========
+
     case 12://FADE ROSE
       redValue = current_FadeVal;
       greenValue = 0;
       blueValue = current_FadeVal * 0.498;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);// 128/255 = ~0.498039
 
       if (redValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -316,15 +290,17 @@ void loop()
         redValue = 0;
       }
       break;
+    //========== END FADE ROSE ==========
+
     case 13://FADE WHITE
       redValue = current_FadeVal;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal;
 
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
+      calculate_RGB();
       break;
+    //========== END FADE WHITE ==========
+
     default:
       allOFF();
       break;
@@ -431,10 +407,6 @@ void allOFF() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void redON() {
@@ -444,10 +416,6 @@ void redON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void orangeON() {
@@ -457,10 +425,6 @@ void orangeON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void yellowON() {
@@ -470,10 +434,6 @@ void yellowON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void chartrueseON() {
@@ -483,10 +443,6 @@ void chartrueseON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void greenON() {
@@ -496,10 +452,6 @@ void greenON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void springGreenON() {
@@ -509,10 +461,6 @@ void springGreenON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void cyanON() {
@@ -522,10 +470,6 @@ void cyanON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void azureON() {
@@ -535,10 +479,6 @@ void azureON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void blueON() {
@@ -548,10 +488,6 @@ void blueON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void violetON() {
@@ -561,10 +497,6 @@ void violetON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void magentaON() {
@@ -574,10 +506,6 @@ void magentaON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void roseON() {
@@ -587,10 +515,6 @@ void roseON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void whiteON() {
@@ -600,10 +524,6 @@ void whiteON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 
@@ -626,6 +546,10 @@ void calculate_RGB() {
 
        Leave RGB values as is, we're good!*/
   }
+
+  redValue = int(redValue * brightness_LED);
+  greenValue = int(greenValue * brightness_LED);
+  blueValue = int(blueValue * brightness_LED);
 }
 
 void show_RGB() {
