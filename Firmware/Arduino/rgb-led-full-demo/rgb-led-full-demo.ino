@@ -8,7 +8,7 @@
   DEVELOPMENT ENVIRONMENT SPECIFICS:
     Firmware developed using Arduino IDE v1.8.9
 
-============================== DESCRIPTION ==============================
+  ============================== DESCRIPTION ==============================
   Expand your color options using analogWrite() and a non-addressable RGB LED.
   This code will either turn on a color, blink, fade, or cycle through 12
   colors and white depending on the button input. There are options to adjust
