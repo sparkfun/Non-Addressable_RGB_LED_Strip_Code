@@ -267,10 +267,6 @@ void allOFF() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void redON() {
@@ -280,10 +276,6 @@ void redON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void orangeON() {
@@ -293,10 +285,6 @@ void orangeON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void yellowON() {
@@ -306,10 +294,6 @@ void yellowON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void chartrueseON() {
@@ -319,10 +303,6 @@ void chartrueseON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void greenON() {
@@ -332,10 +312,6 @@ void greenON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void springGreenON() {
@@ -345,10 +321,6 @@ void springGreenON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void cyanON() {
@@ -358,10 +330,6 @@ void cyanON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void azureON() {
@@ -371,10 +339,6 @@ void azureON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void blueON() {
@@ -384,10 +348,6 @@ void blueON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void violetON() {
@@ -397,10 +357,6 @@ void violetON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void magentaON() {
@@ -410,10 +366,6 @@ void magentaON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void roseON() {
@@ -423,10 +375,6 @@ void roseON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void whiteON() {
@@ -436,10 +384,6 @@ void whiteON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 
@@ -462,6 +406,10 @@ void calculate_RGB() {
 
        Leave RGB values as is, we're good!*/
   }
+
+  redValue = int(redValue * brightness_LED);
+  greenValue = int(greenValue * brightness_LED);
+  blueValue = int(blueValue * brightness_LED);
 }
 
 void show_RGB() {
