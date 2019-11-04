@@ -127,56 +127,72 @@ void loop()
 {
   //used to visually check when Arduino is initialized
 #if DEBUG
-  Serial.println("RED");
+  Serial.print("RED");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   redON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("ORANGE");
+  Serial.print("ORANGE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   orangeON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("YELLOW");
+  Serial.print("YELLOW");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   yellowON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("CHARTRUESE");
+  Serial.print("CHARTRUESE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   chartrueseON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("GREEN");
+  Serial.print("GREEN");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   greenON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("SPRING GREEN");
+  Serial.print("SPRING GREEN");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   springGreenON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("CYAN");
+  Serial.print("CYAN");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   cyanON();
   show_RGB();
   delay(blinkRate);
-  
+
 #if DEBUG
-  Serial.println("AZURE");
+  Serial.print("AZURE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   azureON();
   show_RGB();
@@ -184,14 +200,18 @@ void loop()
 
 
 #if DEBUG
-  Serial.println("BLUE");
+  Serial.print("BLUE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   blueON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("VIOLET");
+  Serial.print("VIOLET");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
 
   violetON();
@@ -199,33 +219,41 @@ void loop()
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("MAGENTA");
+  Serial.print("MAGENTA");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   magentaON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("ROSE");
+  Serial.print("ROSE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   roseON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("WHITE");
+  Serial.print("WHITE");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   whiteON();
   show_RGB();
   delay(blinkRate);
 
 #if DEBUG
-  Serial.println("OFF");
+  Serial.print("OFF");
+  Serial.print(" | Brightness % = ");
+  Serial.println(brightness_LED * 100);
 #endif
   allOFF();
   show_RGB();
   delay(blinkRate);
-  
+
 }//end loop
 
 
