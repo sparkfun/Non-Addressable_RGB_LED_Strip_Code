@@ -117,6 +117,7 @@ void setup() {
   pinMode(bluePin, OUTPUT);
 
   allOFF(); //make sure to initialize LEDs with it turned off
+  calculate_RGB();//calculate for RGB type
   show_RGB(); //make sure to show it happening
 
 #if DEBUG
