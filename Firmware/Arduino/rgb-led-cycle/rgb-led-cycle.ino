@@ -107,6 +107,7 @@ void setup() {
   pinMode(bluePin, OUTPUT);
 
   allOFF(); //initialize LEDs with it turned off
+  calculate_RGB();//calculate for RGB type
   show_RGB(); //make sure to show it happening
 
 #if DEBUG
@@ -132,6 +133,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   redON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -141,6 +143,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   orangeON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -150,6 +153,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   yellowON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -159,6 +163,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   chartrueseON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -168,6 +173,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   greenON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -177,6 +183,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   springGreenON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -186,6 +193,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   cyanON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -195,9 +203,9 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   azureON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
-
 
 #if DEBUG
   Serial.print("BLUE");
@@ -205,6 +213,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   blueON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -213,8 +222,8 @@ void loop()
   Serial.print(" | Brightness % = ");
   Serial.println(brightness_LED * 100);
 #endif
-
   violetON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -224,6 +233,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   magentaON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -233,6 +243,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   roseON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -242,6 +253,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   whiteON();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -251,6 +263,7 @@ void loop()
   Serial.println(brightness_LED * 100);
 #endif
   allOFF();
+  calculate_RGB();
   show_RGB();
   delay(blinkRate);
 
@@ -265,8 +278,6 @@ void allOFF() {
   redValue = 0;
   greenValue =  0;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void redON() {
@@ -274,8 +285,6 @@ void redON() {
   redValue = 255;
   greenValue =  0;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void orangeON() {
@@ -283,8 +292,6 @@ void orangeON() {
   redValue = 255;
   greenValue = 128;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void yellowON() {
@@ -292,8 +299,6 @@ void yellowON() {
   redValue = 255;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void chartrueseON() {
@@ -301,8 +306,6 @@ void chartrueseON() {
   redValue = 128;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void greenON() {
@@ -310,8 +313,6 @@ void greenON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void springGreenON() {
@@ -319,8 +320,6 @@ void springGreenON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 128;
-
-  calculate_RGB();
 }
 
 void cyanON() {
@@ -328,8 +327,6 @@ void cyanON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void azureON() {
@@ -337,8 +334,6 @@ void azureON() {
   redValue = 0;
   greenValue = 128;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void blueON() {
@@ -346,8 +341,6 @@ void blueON() {
   redValue = 0;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void violetON() {
@@ -355,8 +348,6 @@ void violetON() {
   redValue = 128;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void magentaON() {
@@ -364,8 +355,6 @@ void magentaON() {
   redValue = 255;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void roseON() {
@@ -373,8 +362,6 @@ void roseON() {
   redValue = 255;
   greenValue = 0;
   blueValue = 128;
-
-  calculate_RGB();
 }
 
 void whiteON() {
@@ -382,8 +369,6 @@ void whiteON() {
   redValue = 255;
   greenValue = 255;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 
