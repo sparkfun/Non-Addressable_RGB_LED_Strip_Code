@@ -1,6 +1,6 @@
 /******************************************************************************
- rgb-led-full-demo.ino
-  
+  rgb-led-full-demo.ino
+
   Non-Addressable RGB LED Full Demo
   WRITTEN BY: Ho Yun "Bobby" Chan @ SparkFun Electronics
   DATE: November 4, 2019
@@ -76,6 +76,9 @@
 int redValue = 0;
 int greenValue = 0;
 int blueValue = 0;
+
+// Define our Potentiometer to a Analog Pin for Brightness if you use a Potentiometer
+#define knobPin A0
 
 //Create brightness variable
 //Ranging from 0.0-1.0:
@@ -179,6 +182,26 @@ void loop()
 {
   button1State = digitalRead(button1Pin);// button for Color Mode
   button2State = digitalRead(button2Pin);// button for Pattern
+
+  //==================== CHECK POTENTIOMETER FOR BRIGHTNESS ====================
+  //brightness_LED = analogRead(knobPin) / 1023.0; //potentiometer for Brightness, uncomment this line if you are using a potentiometer or photoresistor (i.e. light sensor)
+
+  /* Note: If you do not have a potentiometer or analog sensor attached,
+    the LEDs will flicker when the LED pulls a certain amount of power
+    due to the pin floating. Make sure to also GND the sensor close to your
+    Arduino to reduce the noise.
+
+    The LEDs can flicker at low values when using the fade mode. Make sure
+    to adjust the potentiometer to a certain brightness or fade values
+    for smooth fading.*/
+
+  /*
+    #if DEBUG
+    Serial.print(" Brightness Value % = ");
+    Serial.println(brightness_LED * 100);
+    #endif
+  */
+  //==================== END CHECK POTENTIOMETER FOR BRIGHTNESS ====================
 
   //==================== CHECK BUTTON FOR COLOR MODE ====================
   //if button is pressed, it will be pulled low
@@ -336,10 +359,6 @@ void allOFF() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void redON() {
@@ -349,10 +368,6 @@ void redON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void orangeON() {
@@ -362,10 +377,6 @@ void orangeON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void yellowON() {
@@ -375,10 +386,6 @@ void yellowON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void chartrueseON() {
@@ -388,10 +395,6 @@ void chartrueseON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void greenON() {
@@ -401,10 +404,6 @@ void greenON() {
   blueValue = 0;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void springGreenON() {
@@ -414,10 +413,6 @@ void springGreenON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void cyanON() {
@@ -427,10 +422,6 @@ void cyanON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void azureON() {
@@ -440,10 +431,6 @@ void azureON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void blueON() {
@@ -453,10 +440,6 @@ void blueON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void violetON() {
@@ -466,10 +449,6 @@ void violetON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void magentaON() {
@@ -479,10 +458,6 @@ void magentaON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void roseON() {
@@ -492,10 +467,6 @@ void roseON() {
   blueValue = 128;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 void whiteON() {
@@ -505,10 +476,6 @@ void whiteON() {
   blueValue = 255;
 
   calculate_RGB();
-
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
 }
 
 
@@ -517,58 +484,72 @@ void whiteON() {
 void sequenceTest() {
   //used to visually check when Arduino is initialized
   redON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   orangeON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   yellowON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   chartrueseON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   greenON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   springGreenON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   cyanON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   azureON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   blueON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   violetON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   magentaON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   roseON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   whiteON();
+  calculate_RGB();
   show_RGB();
   delay(50);
 
   allOFF();
+  calculate_RGB();
   show_RGB();
   delay(50);
 }//-------------------- END sequenceTest() FUNCTION --------------------
@@ -591,6 +572,10 @@ void calculate_RGB() {
 
        Leave RGB values as is, we're good!*/
   }
+
+  redValue = int(redValue * brightness_LED);
+  greenValue = int(greenValue * brightness_LED);
+  blueValue = int(blueValue * brightness_LED);
 }
 
 void show_RGB() {
@@ -666,21 +651,15 @@ void patternFade() {
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE RED ==========
+
     case 2://FADE ORANGE
       redValue = current_FadeVal;
       greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (redValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -695,27 +674,23 @@ void patternFade() {
       //Serial.print("Green Value =");
       //Serial.println( int((current_FadeVal * 0.498) * brightness_LED));
       break;
+    //========== END FADE ORANGE ==========
+
     case 3://FADE YELLOW
       redValue = current_FadeVal;
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE YELLOW ==========
+
     case 4://FADE CHARTRUESE
       redValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (greenValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -724,27 +699,23 @@ void patternFade() {
         greenValue = 0;
       }
       break;
+    //========== END FADE CHARTRUESE ==========
+
     case 5://FADE GREEN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE GREEN ==========
+
     case 6://FADE SPRING GREEN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (greenValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -753,28 +724,23 @@ void patternFade() {
         greenValue = 0;
       }
       break;
+    //========== END FADE SPRING GREEN ==========
+
     case 7://FADE CYAN
       redValue = 0;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE CYAN ==========
+
     case 8://FADE AZURE
       redValue = 0;
       greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
-
       if (blueValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
         //it will be basically be off, make sure to turn off other color so that
@@ -782,27 +748,23 @@ void patternFade() {
         blueValue = 0;
       }
       break;
+    //========== END FADE AZURE ==========
+
     case 9://FADE BLUE
       redValue = 0;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE BLUE ==========
+
     case 10://FADE VIOLET
       redValue = current_FadeVal * 0.498;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);// 128/255 = ~0.498039
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
 
       if (blueValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -811,27 +773,23 @@ void patternFade() {
         blueValue = 0;
       }
       break;
+    //========== END FADE VIOLET ==========
+
     case 11://FADE MAGENTA
       redValue = current_FadeVal;
       greenValue = 0;
       blueValue = current_FadeVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+    //========== END FADE MAGENTA ==========
+
     case 12://FADE ROSE
       redValue = current_FadeVal;
       greenValue = 0;
       blueValue = current_FadeVal * 0.498;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);// 128/255 = ~0.498039
 
       if (redValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -840,17 +798,20 @@ void patternFade() {
         redValue = 0;
       }
       break;
+    //========== END FADE ROSE ==========
+
     case 13://FADE WHITE
       redValue = current_FadeVal;
       greenValue = current_FadeVal;
       blueValue = current_FadeVal;
 
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
+      calculate_RGB();
       break;
+    //========== END FADE WHITE ==========
+
     default:
       allOFF();
+      calculate_RGB();
       break;
   }
 
@@ -895,131 +856,94 @@ void patternBlink() {
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 2://ORANGE
       redValue = blinkVal;
       greenValue = blinkVal  * 0.498;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 3://YELLOW
       redValue = blinkVal;
       greenValue = blinkVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 4://CHARTREUSE
       redValue = blinkVal * 0.498;
       greenValue = blinkVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 5://GREEN
       redValue = 0;
       greenValue = blinkVal;
       blueValue = 0;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 6://SRING GREEN
       redValue = 0;
       greenValue = blinkVal;
       blueValue = blinkVal * 0.498;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int((blueValue) * brightness_LED);
       break;
+
     case 7://CYAN
       redValue = 0;
       greenValue = blinkVal;
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 8://AZURE
       redValue = 0;
       greenValue = blinkVal * 0.498;
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 9://BLUE
       redValue = 0;
       greenValue = 0;
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 10://VIOLET
       redValue = blinkVal  * 0.498;
       greenValue = 0;
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 11://MAGENTA
       redValue = blinkVal;
       greenValue = 0;
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     case 12://ROSE
       redValue = blinkVal;
       greenValue = 0;
       blueValue = blinkVal * 0.498;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
     case 13://WHITE
       redValue = blinkVal;
@@ -1027,13 +951,11 @@ void patternBlink() {
       blueValue = blinkVal;
 
       calculate_RGB();
-
-      redValue = int(redValue * brightness_LED);
-      greenValue = int(greenValue * brightness_LED);
-      blueValue = int(blueValue * brightness_LED);
       break;
+
     default:
       allOFF();
+      calculate_RGB();
       break;
   }
 

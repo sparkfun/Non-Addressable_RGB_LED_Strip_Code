@@ -174,7 +174,7 @@ void loop()
 
       calculate_RGB();
       break;
-    //========== END FADE ORANGE ==========
+    //========== END FADE YELLOW ==========
 
     case 4://FADE CHARTRUESE
       redValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
@@ -303,6 +303,7 @@ void loop()
 
     default:
       allOFF();
+      calculate_RGB();
       break;
   }
 
