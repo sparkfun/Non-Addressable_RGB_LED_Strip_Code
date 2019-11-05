@@ -159,6 +159,7 @@ void setup() {
 
   sequenceTest();//visually initialization
   allOFF(); //make sure to initialize LEDs with it turned off
+  calculate_RGB();//calculate for RGB type
   show_RGB(); //make sure to show it happening
 
   pinMode(button1Pin, INPUT_PULLUP); //use internal pullup resistor with button
@@ -263,6 +264,7 @@ void loop()
         //reset ledMode
         colorMode = 0;
         allOFF();
+        calculate_RGB();
         show_RGB();
       }
     }
@@ -341,6 +343,7 @@ void loop()
       break;
     default:
       allOFF();
+      calculate_RGB();
       show_RGB();
       break;
   }
@@ -359,8 +362,6 @@ void allOFF() {
   redValue = 0;
   greenValue =  0;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void redON() {
@@ -368,8 +369,6 @@ void redON() {
   redValue = 255;
   greenValue =  0;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void orangeON() {
@@ -377,8 +376,6 @@ void orangeON() {
   redValue = 255;
   greenValue = 128;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void yellowON() {
@@ -386,8 +383,6 @@ void yellowON() {
   redValue = 255;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void chartrueseON() {
@@ -395,8 +390,6 @@ void chartrueseON() {
   redValue = 128;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void greenON() {
@@ -404,8 +397,6 @@ void greenON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 0;
-
-  calculate_RGB();
 }
 
 void springGreenON() {
@@ -413,8 +404,6 @@ void springGreenON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 128;
-
-  calculate_RGB();
 }
 
 void cyanON() {
@@ -422,8 +411,6 @@ void cyanON() {
   redValue = 0;
   greenValue = 255;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void azureON() {
@@ -431,8 +418,6 @@ void azureON() {
   redValue = 0;
   greenValue = 128;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void blueON() {
@@ -440,8 +425,6 @@ void blueON() {
   redValue = 0;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void violetON() {
@@ -449,8 +432,6 @@ void violetON() {
   redValue = 128;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void magentaON() {
@@ -458,8 +439,6 @@ void magentaON() {
   redValue = 255;
   greenValue = 0;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 void roseON() {
@@ -467,8 +446,6 @@ void roseON() {
   redValue = 255;
   greenValue = 0;
   blueValue = 128;
-
-  calculate_RGB();
 }
 
 void whiteON() {
@@ -476,8 +453,6 @@ void whiteON() {
   redValue = 255;
   greenValue = 255;
   blueValue = 255;
-
-  calculate_RGB();
 }
 
 
@@ -595,45 +570,59 @@ void patternON() {
   {
     case 1:
       redON();
+      calculate_RGB();
       break;
     case 2:
       orangeON();
+      calculate_RGB();
       break;
     case 3:
       yellowON();
+      calculate_RGB();
       break;
     case 4:
       chartrueseON();
+      calculate_RGB();
       break;
     case 5:
       greenON();
+      calculate_RGB();
       break;
     case 6:
       springGreenON();
+      calculate_RGB();
       break;
     case 7:
       cyanON();
+      calculate_RGB();
       break;
     case 8:
       azureON();
+      calculate_RGB();
       break;
     case 9:
       blueON();
+      calculate_RGB();
       break;
     case 10:
       violetON();
+      calculate_RGB();
       break;
     case 11:
       magentaON();
+      calculate_RGB();
       break;
     case 12:
       roseON();
+      calculate_RGB();
       break;
     case 13:
       whiteON();
+      calculate_RGB();
       break;
     default:
       allOFF();
+      calculate_RGB();
       break;
   }//end switch
 
@@ -862,7 +851,7 @@ void patternBlink() {
 
     case 2://ORANGE
       redValue = blinkVal;
-      greenValue = blinkVal  * 0.498;
+      greenValue = blinkVal * 0.498;
       blueValue = 0;
 
       calculate_RGB();
@@ -925,7 +914,7 @@ void patternBlink() {
       break;
 
     case 10://VIOLET
-      redValue = blinkVal  * 0.498;
+      redValue = blinkVal * 0.498;
       greenValue = 0;
       blueValue = blinkVal;
 
@@ -1105,6 +1094,9 @@ void patternRainbow() {
   redValue = int(rainbowRedVal * brightness_LED);
   greenValue = int(rainbowGreenVal * brightness_LED);
   blueValue = int(rainbowBlueVal * brightness_LED);
+  
+  // Note: the rainbow function calculates the function here so
+  // we do not need to call the `calculate_RGB()` function
 
   show_RGB();
 
