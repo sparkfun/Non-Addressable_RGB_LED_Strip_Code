@@ -77,7 +77,8 @@ int redValue = 0;
 int greenValue = 0;
 int blueValue = 0;
 
-// Define our Potentiometer to a Analog Pin for Brightness if you use a Potentiometer
+// Define our Potentiometer to a Analog Pin for Brightness
+// This is needed if you use a Potentiometer
 #define knobPin A0
 
 //Create brightness variable
@@ -184,7 +185,8 @@ void loop()
   button2State = digitalRead(button2Pin);// button for Pattern
 
   //==================== CHECK POTENTIOMETER FOR BRIGHTNESS ====================
-  //brightness_LED = analogRead(knobPin) / 1023.0; //potentiometer for Brightness, uncomment this line if you are using a potentiometer or photoresistor (i.e. light sensor)
+  //Uncomment the line below if you are using a potentiometer or photoresistor (i.e. light sensor)
+  //brightness_LED = analogRead(knobPin) / 1023.0; //potentiometer for Brightness
 
   /* Note: If you do not have a potentiometer or analog sensor attached,
     the LEDs will flicker when the LED pulls a certain amount of power
