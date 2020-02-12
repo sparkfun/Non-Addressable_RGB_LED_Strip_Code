@@ -82,24 +82,24 @@ int blueValue = 0;
 //  0.0 is off
 //  0.5 is 50%
 //  1.0 is fully on
-float brightness_LED = 0.1;
+float brightnessLED = 0.1;
 
 //Create variables for type of LED and if it is used with a transistor
-boolean common_anode = false;
-boolean common_cathode = true;//i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
+boolean commonAnode = false;
+boolean commonCathode = true;//i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
 
 // Note:
-//  Common Anode is `common_anode`
-//  Common Cathode LED is `common_cathode`
-//  Common Anode RGB LED Strip with transistor is `!common_anode`
-//  RGB High Power LED with PicoBuck is also  `!common_anode`
-boolean RGB_type = !common_anode;
+//  Common Anode is `commonAnode`
+//  Common Cathode LED is `commonCathode`
+//  Common Anode RGB LED Strip with transistor is `!commonAnode`
+//  RGB High Power LED with PicoBuck is also  `!commonAnode`
+boolean rgbType = !commonAnode;
 
 int colorMode = 1; //color mode to control LED color
 
 //Variables for fading LED
-int prev_FadeVal = 0;
-int current_FadeVal = 0;
+int prevFadeVal = 0;
+int currentFadeVal = 0;
 boolean increasing = true;
 int fadeVal = 5; //value to step when increasing/decreasing, recommended to be 1 or 5, larger numbers will have problems lighting up
 int fadeMAX = 255; //maximum fade value
@@ -117,12 +117,12 @@ void setup() {
   pinMode(bluePin, OUTPUT);
 
   allOFF(); //make sure to initialize LEDs with it turned off
-  calculate_RGB();//calculate for RGB type
-  show_RGB(); //make sure to show it happening
+  rgbCalc();//calculate for RGB type
+  rgbShow(); //make sure to show it happening
 
 #if DEBUG
   Serial.begin(9600); //initialize Serial Monitor
-  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Needed for native USB.
+  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Option for native USB.
   Serial.println("Custom Color Fading w/ an RGB LED.");
   Serial.println(" ");
   Serial.println("Note: Make sure to adjust the code for a common cathode or common anode.");
@@ -137,20 +137,20 @@ void loop()
 
   switch (colorMode) {
     case 1://FADE RED
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE RED ==========
 
     case 2://FADE ORANGE
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (redValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -161,28 +161,28 @@ void loop()
 
       // takes x amount of steps if you do not set it to zero for certain brightness (i.e. takes 8 more steps to turn off for 0.1)
       //Serial.print("Red Value =");
-      //Serial.println( int((current_FadeVal) * brightness_LED));
+      //Serial.println( int((currentFadeVal) * brightnessLED));
 
       //Serial.print("Green Value =");
-      //Serial.println( int((current_FadeVal * 0.498) * brightness_LED));
+      //Serial.println( int((currentFadeVal * 0.498) * brightnessLED));
       break;
     //========== END FADE ORANGE ==========
 
     case 3://FADE YELLOW
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal;
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE YELLOW ==========
 
     case 4://FADE CHARTRUESE
-      redValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
-      greenValue = current_FadeVal;
+      redValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (greenValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -195,19 +195,19 @@ void loop()
 
     case 5://FADE GREEN
       redValue = 0;
-      greenValue = current_FadeVal;
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE GREEN ==========
 
     case 6://FADE SPRING GREEN
       redValue = 0;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
 
-      calculate_RGB();
+      rgbCalc();
 
       if (greenValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -220,19 +220,19 @@ void loop()
 
     case 7://FADE CYAN
       redValue = 0;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal;
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE CYAN ==========
 
     case 8://FADE AZURE
       redValue = 0;
-      greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
-      blueValue = current_FadeVal;
+      greenValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (blueValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -246,18 +246,18 @@ void loop()
     case 9://FADE BLUE
       redValue = 0;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE BLUE ==========
 
     case 10://FADE VIOLET
-      redValue = current_FadeVal * 0.498;
+      redValue = currentFadeVal * 0.498;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (blueValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -269,20 +269,20 @@ void loop()
     //========== END FADE VIOLET ==========
 
     case 11://FADE MAGENTA
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE MAGENTA ==========
 
     case 12://FADE ROSE
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
-      blueValue = current_FadeVal * 0.498;
+      blueValue = currentFadeVal * 0.498;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (redValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -294,17 +294,17 @@ void loop()
     //========== END FADE ROSE ==========
 
     case 13://FADE WHITE
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal;
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE WHITE ==========
 
     default:
       allOFF();
-      calculate_RGB();
+      rgbCalc();
       break;
   }
 
@@ -355,37 +355,37 @@ void loop()
     Serial.print("OFF");
   }
   Serial.print(" | Brightness % = ");
-  Serial.print(brightness_LED * 100);
+  Serial.print(brightnessLED * 100);
   Serial.print("%");
 
   Serial.print(" | Fade Val Before Calc= ");
-  Serial.println(current_FadeVal);
+  Serial.println(currentFadeVal);
 #endif
 
-  show_RGB();
+  rgbShow();
   delay(fadeDelay);
 
 
   if (increasing == true) {
     //increasing
-    current_FadeVal += fadeVal;
+    currentFadeVal += fadeVal;
   }
   else {
     //decreasing
-    current_FadeVal -= fadeVal;
+    currentFadeVal -= fadeVal;
   }
 
-  if (current_FadeVal > fadeMAX) {
+  if (currentFadeVal > fadeMAX) {
     increasing = false;
-    prev_FadeVal -= fadeVal;//undo addition
+    prevFadeVal -= fadeVal;//undo addition
 
-    current_FadeVal = prev_FadeVal;
+    currentFadeVal = prevFadeVal;
   }
-  else if (current_FadeVal < fadeMIN) {
+  else if (currentFadeVal < fadeMIN) {
     increasing = true;
-    prev_FadeVal += fadeVal;//undo subtraction
+    prevFadeVal += fadeVal;//undo subtraction
 
-    current_FadeVal = prev_FadeVal;
+    currentFadeVal = prevFadeVal;
 
     colorMode += 1;//next color
     if (colorMode > 13) {
@@ -393,7 +393,7 @@ void loop()
     }
   }
 
-  prev_FadeVal = current_FadeVal;
+  prevFadeVal = currentFadeVal;
 
 }//END LOOP
 
@@ -408,7 +408,7 @@ void allOFF() {
   greenValue =  0;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void redON() {
@@ -417,7 +417,7 @@ void redON() {
   greenValue =  0;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void orangeON() {
@@ -426,7 +426,7 @@ void orangeON() {
   greenValue = 128;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void yellowON() {
@@ -435,7 +435,7 @@ void yellowON() {
   greenValue = 255;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void chartrueseON() {
@@ -444,7 +444,7 @@ void chartrueseON() {
   greenValue = 255;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void greenON() {
@@ -453,7 +453,7 @@ void greenON() {
   greenValue = 255;
   blueValue = 0;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void springGreenON() {
@@ -462,7 +462,7 @@ void springGreenON() {
   greenValue = 255;
   blueValue = 128;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void cyanON() {
@@ -471,7 +471,7 @@ void cyanON() {
   greenValue = 255;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void azureON() {
@@ -480,7 +480,7 @@ void azureON() {
   greenValue = 128;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void blueON() {
@@ -489,7 +489,7 @@ void blueON() {
   greenValue = 0;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void violetON() {
@@ -498,7 +498,7 @@ void violetON() {
   greenValue = 0;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void magentaON() {
@@ -507,7 +507,7 @@ void magentaON() {
   greenValue = 0;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void roseON() {
@@ -516,7 +516,7 @@ void roseON() {
   greenValue = 0;
   blueValue = 128;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 void whiteON() {
@@ -525,14 +525,14 @@ void whiteON() {
   greenValue = 255;
   blueValue = 255;
 
-  calculate_RGB();
+  rgbCalc();
 }
 
 
 
-void calculate_RGB() {
+void rgbCalc() {
   //use this to correctly light up LED depending on the setup
-  if (RGB_type == common_anode) {
+  if (rgbType == commonAnode) {
     /* If using a common anode LED, a pin
        should turn ON the LED when the pin is LOW.*/
     redValue = 255 - redValue;
@@ -549,12 +549,12 @@ void calculate_RGB() {
        Leave RGB values as is, we're good!*/
   }
 
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
+  redValue = int(redValue * brightnessLED);
+  greenValue = int(greenValue * brightnessLED);
+  blueValue = int(blueValue * brightnessLED);
 }
 
-void show_RGB() {
+void rgbShow() {
   //once value is calculated, show the LED color
   analogWrite(redPin, redValue);
   analogWrite(greenPin, greenValue);

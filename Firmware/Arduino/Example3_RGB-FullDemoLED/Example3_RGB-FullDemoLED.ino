@@ -86,26 +86,26 @@ int blueValue = 0;
 //  0.0 is off
 //  0.5 is 50%
 //  1.0 is fully on
-float brightness_LED = 0.1;
+float brightnessLED = 0.1;
 
 //Create variables for type of LED and if it is used with a transistor
-boolean common_anode = false;
-boolean common_cathode = true;//i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
+boolean commonAnode = false;
+boolean commonCathode = true;//i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
 
 // Note:
-//  Common Anode LED is `common_anode`
-//  Common Cathode LED is `common_cathode`
-//  Common Anode RGB LED Strip with transistor is `!common_anode`
-//  RGB High Power LED with PicoBuck is also  `!common_anode`
-boolean RGB_type = !common_anode;
+//  Common Anode LED is `commonAnode`
+//  Common Cathode LED is `commonCathode`
+//  Common Anode RGB LED Strip with transistor is `!commonAnode`
+//  RGB High Power LED with PicoBuck is also  `!commonAnode`
+boolean rgbType = !commonAnode;
 
 //Variables to keep track of color and pattern
 int colorMode = 0; //color mode to control LED color
 int pattern = 0; //pattern to turn off, stay on, fade, blink
 
 //Variables for fading LED
-int prev_FadeVal = 0;
-int current_FadeVal = 0;
+int prevFadeVal = 0;
+int currentFadeVal = 0;
 boolean increasing = true;
 int fadeVal = 5; //value to step when increasing/decreasing, recommended to be 1 or 5, larger numbers will have problems lighting up
 int fadeMAX = 255; //maximum fade value
@@ -131,14 +131,14 @@ int rainbowDelay = 5; //in milliseconds to transition between colors
 //Button variables for color
 const int button1Pin = 2;
 boolean button1State = false;
-boolean prev_button1State = false;
-boolean current_button1State = false;
+boolean prevbutton1State = false;
+boolean currentbutton1State = false;
 
 //Button variables for pattern
 const int button2Pin = 3;
 boolean button2State = false;
-boolean prev_button2State = false;
-boolean current_button2State = false;
+boolean prevbutton2State = false;
+boolean currentbutton2State = false;
 
 
 
@@ -150,7 +150,7 @@ void setup() {
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
 
-  if (RGB_type == common_anode) {
+  if (rgbType == commonAnode) {
     //set values 255 to turn off OFF if common anode
     rainbowRedVal = 255;
     rainbowGreenVal = 255;
@@ -159,15 +159,15 @@ void setup() {
 
   sequenceTest();//visually initialization
   allOFF(); //make sure to initialize LEDs with it turned off
-  calculate_RGB();//calculate for RGB type
-  show_RGB(); //make sure to show it happening
+  rgbCalc();//calculate for RGB type
+  rgbShow(); //make sure to show it happening
 
   pinMode(button1Pin, INPUT_PULLUP); //use internal pullup resistor with button
   pinMode(button2Pin, INPUT_PULLUP); //use internal pullup resistor with button
 
 #if DEBUG
   Serial.begin(9600); //initialize Serial Monitor
-  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Needed for native USB.
+  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Option for native USB.
   Serial.println("Custom Color Mixing Demo w/ an RGB LED. Toggling the buttons will adjust the color and pattern.");
   Serial.println(" ");
   Serial.println("Note: Make sure to adjust the code for a common cathode or common anode.");
@@ -187,7 +187,7 @@ void loop()
 
   //==================== CHECK POTENTIOMETER FOR BRIGHTNESS ====================
   //Uncomment the line below if you are using a potentiometer or photoresistor (i.e. light sensor)
-  //brightness_LED = analogRead(knobPin) / 1023.0; //potentiometer for Brightness
+  //brightnessLED = analogRead(knobPin) / 1023.0; //potentiometer for Brightness
 
   /* Note: If you do not have a potentiometer or analog sensor attached,
     the LEDs will flicker when the LED pulls a certain amount of power
@@ -201,7 +201,7 @@ void loop()
   /*
     #if DEBUG
     Serial.print(" Brightness Value % = ");
-    Serial.println(brightness_LED * 100);
+    Serial.println(brightnessLED * 100);
     #endif
   */
   //==================== END CHECK POTENTIOMETER FOR BRIGHTNESS ====================
@@ -209,9 +209,9 @@ void loop()
   //==================== CHECK BUTTON FOR COLOR MODE ====================
   //if button is pressed, it will be pulled low
   if (button1State == LOW) {
-    current_button1State = true; // button has been pressed once
+    currentbutton1State = true; // button has been pressed once
 
-    if (prev_button1State != current_button1State) { //check to see if button is still being pressed
+    if (prevbutton1State != currentbutton1State) { //check to see if button is still being pressed
       colorMode = colorMode + 1; //change color MODE after button has been pressed
 #if DEBUG
       Serial.print("Color Mode = ");
@@ -264,30 +264,30 @@ void loop()
         //reset ledMode
         colorMode = 0;
         allOFF();
-        calculate_RGB();
-        show_RGB();
+        rgbCalc();
+        rgbShow();
       }
     }
     else { //do nothing because finger is still on button
     }
-    prev_button1State = current_button1State;//update button1 state
+    prevbutton1State = currentbutton1State;//update button1 state
   }
 
 
 
   //button has not been pressed, it will be high
   else {
-    current_button1State = false;
-    prev_button1State = current_button1State;//update button1 state
+    currentbutton1State = false;
+    prevbutton1State = currentbutton1State;//update button1 state
   }
 
   //==================== END CHECK BUTTON FOR COLOR MODE ====================
 
   //==================== CHECK BUTTON FOR PATTERN ====================
   if (button2State == LOW) {
-    current_button2State = true; //button has been pressed once
+    currentbutton2State = true; //button has been pressed once
 
-    if (prev_button2State != current_button2State) { //check to see if button is still being pressed
+    if (prevbutton2State != currentbutton2State) { //check to see if button is still being pressed
       pattern = pattern + 1; //change LED pattern after button has been pressed
 
 #if DEBUG
@@ -320,13 +320,13 @@ void loop()
 
     else { //do nothing because finger is still on button
     }
-    prev_button2State = current_button2State; //update button2 state
+    prevbutton2State = currentbutton2State; //update button2 state
   }
 
   //button has not been pressed, it will be high
   else {
-    current_button2State = false;
-    prev_button2State = current_button2State; //update button2 state
+    currentbutton2State = false;
+    prevbutton2State = currentbutton2State; //update button2 state
   }
   switch (pattern) {
     case 1:
@@ -343,8 +343,8 @@ void loop()
       break;
     default:
       allOFF();
-      calculate_RGB();
-      show_RGB();
+      rgbCalc();
+      rgbShow();
       break;
   }
   //==================== END CHECK BUTTON FOR PATTERN ====================
@@ -461,79 +461,79 @@ void whiteON() {
 void sequenceTest() {
   //used to visually check when Arduino is initialized
   redON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   orangeON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   yellowON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   chartrueseON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   greenON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   springGreenON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   cyanON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   azureON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   blueON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   violetON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   magentaON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   roseON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   whiteON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 
   allOFF();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(50);
 }//-------------------- END sequenceTest() FUNCTION --------------------
 
-void calculate_RGB() {
+void rgbCalc() {
   //use this to correctly light up LED depending on the setup
-  if (RGB_type == common_anode) {
+  if (rgbType == commonAnode) {
     /* If using a common anode LED, a pin
        should turn ON the LED when the pin is LOW.*/
     redValue = 255 - redValue;
@@ -550,12 +550,12 @@ void calculate_RGB() {
        Leave RGB values as is, we're good!*/
   }
 
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
+  redValue = int(redValue * brightnessLED);
+  greenValue = int(greenValue * brightnessLED);
+  blueValue = int(blueValue * brightnessLED);
 }
 
-void show_RGB() {
+void rgbShow() {
   //once value is calculated, show the LED color
   analogWrite(redPin, redValue);
   analogWrite(greenPin, greenValue);
@@ -570,63 +570,63 @@ void patternON() {
   {
     case 1:
       redON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 2:
       orangeON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 3:
       yellowON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 4:
       chartrueseON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 5:
       greenON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 6:
       springGreenON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 7:
       cyanON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 8:
       azureON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 9:
       blueON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 10:
       violetON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 11:
       magentaON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 12:
       roseON();
-      calculate_RGB();
+      rgbCalc();
       break;
     case 13:
       whiteON();
-      calculate_RGB();
+      rgbCalc();
       break;
     default:
       allOFF();
-      calculate_RGB();
+      rgbCalc();
       break;
   }//end switch
 
-  show_RGB();
+  rgbShow();
 }//-------------------- end patternON() FUNCTION --------------------
 
 
@@ -637,20 +637,20 @@ void patternFade() {
 
   switch (colorMode) {
     case 1://FADE RED
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE RED ==========
 
     case 2://FADE ORANGE
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (redValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -660,28 +660,28 @@ void patternFade() {
       }
       // takes x amount of steps if you do not set it to zero for certain brightness (i.e. takes 8 more steps to turn off for 0.1)
       //Serial.print("Red Value =");
-      //Serial.println( int((current_FadeVal) * brightness_LED));
+      //Serial.println( int((currentFadeVal) * brightnessLED));
 
       //Serial.print("Green Value =");
-      //Serial.println( int((current_FadeVal * 0.498) * brightness_LED));
+      //Serial.println( int((currentFadeVal * 0.498) * brightnessLED));
       break;
     //========== END FADE ORANGE ==========
 
     case 3://FADE YELLOW
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal;
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE YELLOW ==========
 
     case 4://FADE CHARTRUESE
-      redValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
-      greenValue = current_FadeVal;
+      redValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (greenValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -694,19 +694,19 @@ void patternFade() {
 
     case 5://FADE GREEN
       redValue = 0;
-      greenValue = current_FadeVal;
+      greenValue = currentFadeVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE GREEN ==========
 
     case 6://FADE SPRING GREEN
       redValue = 0;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
 
-      calculate_RGB();
+      rgbCalc();
 
       if (greenValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -719,19 +719,19 @@ void patternFade() {
 
     case 7://FADE CYAN
       redValue = 0;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal;
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE CYAN ==========
 
     case 8://FADE AZURE
       redValue = 0;
-      greenValue = current_FadeVal * 0.498; // 128/255 = ~0.498039
-      blueValue = current_FadeVal;
+      greenValue = currentFadeVal * 0.498; // 128/255 = ~0.498039
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       if (blueValue > 0 && greenValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
         //it will be basically be off, make sure to turn off other color so that
@@ -744,18 +744,18 @@ void patternFade() {
     case 9://FADE BLUE
       redValue = 0;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE BLUE ==========
 
     case 10://FADE VIOLET
-      redValue = current_FadeVal * 0.498;
+      redValue = currentFadeVal * 0.498;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (blueValue > 0 && redValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -767,20 +767,20 @@ void patternFade() {
     //========== END FADE VIOLET ==========
 
     case 11://FADE MAGENTA
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
-      blueValue = current_FadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE MAGENTA ==========
 
     case 12://FADE ROSE
-      redValue = current_FadeVal;
+      redValue = currentFadeVal;
       greenValue = 0;
-      blueValue = current_FadeVal * 0.498;
+      blueValue = currentFadeVal * 0.498;
 
-      calculate_RGB();
+      rgbCalc();
 
       if (redValue > 0 && blueValue == 0) {
         //tertiary component is 1/2, so when it calculates to decimal with fade value,
@@ -792,46 +792,46 @@ void patternFade() {
     //========== END FADE ROSE ==========
 
     case 13://FADE WHITE
-      redValue = current_FadeVal;
-      greenValue = current_FadeVal;
-      blueValue = current_FadeVal;
+      redValue = currentFadeVal;
+      greenValue = currentFadeVal;
+      blueValue = currentFadeVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     //========== END FADE WHITE ==========
 
     default:
       allOFF();
-      calculate_RGB();
+      rgbCalc();
       break;
   }
 
-  show_RGB();
+  rgbShow();
   delay(fadeDelay);
 
 
   if (increasing == true) {
-    current_FadeVal += fadeVal;
+    currentFadeVal += fadeVal;
   }
   else { //decreasing
-    current_FadeVal -= fadeVal;
+    currentFadeVal -= fadeVal;
   }
 
-  if (current_FadeVal > fadeMAX) {
+  if (currentFadeVal > fadeMAX) {
     increasing = false;
-    prev_FadeVal -= fadeVal;//undo addition
+    prevFadeVal -= fadeVal;//undo addition
 
-    current_FadeVal = prev_FadeVal;
+    currentFadeVal = prevFadeVal;
 
   }
-  else if (current_FadeVal < fadeMIN) {
+  else if (currentFadeVal < fadeMIN) {
     increasing = true;
-    prev_FadeVal += fadeVal;//unto subtraction
+    prevFadeVal += fadeVal;//unto subtraction
 
-    current_FadeVal = prev_FadeVal;
+    currentFadeVal = prevFadeVal;
   }
 
-  prev_FadeVal = current_FadeVal;
+  prevFadeVal = currentFadeVal;
 }//-------------------- END patternFade() FUNCTION --------------------
 
 
@@ -846,7 +846,7 @@ void patternBlink() {
       greenValue = 0;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 2://ORANGE
@@ -854,7 +854,7 @@ void patternBlink() {
       greenValue = blinkVal * 0.498;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 3://YELLOW
@@ -862,7 +862,7 @@ void patternBlink() {
       greenValue = blinkVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 4://CHARTREUSE
@@ -870,7 +870,7 @@ void patternBlink() {
       greenValue = blinkVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 5://GREEN
@@ -878,7 +878,7 @@ void patternBlink() {
       greenValue = blinkVal;
       blueValue = 0;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 6://SRING GREEN
@@ -886,7 +886,7 @@ void patternBlink() {
       greenValue = blinkVal;
       blueValue = blinkVal * 0.498;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 7://CYAN
@@ -894,7 +894,7 @@ void patternBlink() {
       greenValue = blinkVal;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 8://AZURE
@@ -902,7 +902,7 @@ void patternBlink() {
       greenValue = blinkVal * 0.498;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 9://BLUE
@@ -910,7 +910,7 @@ void patternBlink() {
       greenValue = 0;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 10://VIOLET
@@ -918,7 +918,7 @@ void patternBlink() {
       greenValue = 0;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 11://MAGENTA
@@ -926,7 +926,7 @@ void patternBlink() {
       greenValue = 0;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     case 12://ROSE
@@ -934,23 +934,23 @@ void patternBlink() {
       greenValue = 0;
       blueValue = blinkVal * 0.498;
 
-      calculate_RGB();
+      rgbCalc();
       break;
     case 13://WHITE
       redValue = blinkVal;
       greenValue = blinkVal;
       blueValue = blinkVal;
 
-      calculate_RGB();
+      rgbCalc();
       break;
 
     default:
       allOFF();
-      calculate_RGB();
+      rgbCalc();
       break;
   }
 
-  show_RGB();
+  rgbShow();
 
   if (counter == blinkRate) {
     if (blinkON == true) {
@@ -972,7 +972,7 @@ void patternBlink() {
 
 //-------------------- patternRainbow() FUNCTION --------------------
 void patternRainbow() {
-  if (RGB_type == common_cathode) {
+  if (rgbType == commonCathode) {
     if (rainbowTransitionVal == 0) {
       //RED
       rainbowRedVal += 5;
@@ -1028,7 +1028,7 @@ void patternRainbow() {
         rainbowTransitionVal = 1;
       }
     }
-  }//end check for common_cathode
+  }//end check for commonCathode
 
 
 
@@ -1089,16 +1089,16 @@ void patternRainbow() {
         rainbowTransitionVal = 1;
       }
     }
-  }//end check for common_anode
+  }//end check for commonAnode
 
-  redValue = int(rainbowRedVal * brightness_LED);
-  greenValue = int(rainbowGreenVal * brightness_LED);
-  blueValue = int(rainbowBlueVal * brightness_LED);
+  redValue = int(rainbowRedVal * brightnessLED);
+  greenValue = int(rainbowGreenVal * brightnessLED);
+  blueValue = int(rainbowBlueVal * brightnessLED);
   
   // Note: the rainbow function calculates the function here so
-  // we do not need to call the `calculate_RGB()` function
+  // we do not need to call the `rgbCalc()` function
 
-  show_RGB();
+  rgbShow();
 
   delay(rainbowDelay);
 }//-------------------- END patternRainbow() FUNCTION --------------------

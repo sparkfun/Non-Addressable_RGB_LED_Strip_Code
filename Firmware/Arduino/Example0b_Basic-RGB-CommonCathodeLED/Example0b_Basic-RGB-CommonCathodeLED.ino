@@ -69,7 +69,7 @@ void setup() {
   pinMode(bluePin, OUTPUT);
 
   Serial.begin(9600); //initialize Serial Monitor
-  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Needed for native USB.
+  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Option for native USB.
   Serial.println("Basic Custom Color Mixing with Common Cathode LEDs.");
   Serial.println(" ");
 }
@@ -187,5 +187,3 @@ void loop()
   analogWrite(bluePin, 0);
   delay(1000);
 }
-
-

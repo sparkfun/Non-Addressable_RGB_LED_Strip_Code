@@ -82,18 +82,18 @@ int blueValue = 0;
 //  0.0 is off
 //  0.5 is 50%
 //  1.0 is fully on
-float brightness_LED = 0.1;
+float brightnessLED = 0.1;
 
 //Create variables for type of LED and if it is used with a transistor
-boolean common_anode = false;
-boolean common_cathode = true;//i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
+boolean commonAnode = false;
+boolean commonCathode = true; //i.e.) When pin is HIGH, LED will also go HIGH without a transistor/PicoBuck
 
 // Note:
-//  Common Anode is `common_anode`
-//  Common Cathode LED is `common_cathode`
-//  Common Anode RGB LED Strip with transistor is `!common_anode`
-//  RGB High Power LED with PicoBuck is also  `!common_anode`
-boolean RGB_type = !common_anode;
+//  Common Anode is `commonAnode`
+//  Common Cathode LED is `commonCathode`
+//  Common Anode RGB LED Strip with transistor is `!commonAnode`
+//  RGB High Power LED with PicoBuck is also  `!commonAnode`
+boolean rgbType = !commonAnode;
 
 int blinkRate = 1000; //in milliseconds
 
@@ -107,12 +107,12 @@ void setup() {
   pinMode(bluePin, OUTPUT);
 
   allOFF(); //initialize LEDs with it turned off
-  calculate_RGB();//calculate for RGB type
-  show_RGB(); //make sure to show it happening
+  rgbCalc();//calculate for RGB type
+  rgbShow(); //make sure to show it happening
 
 #if DEBUG
   Serial.begin(9600); //initialize Serial Monitor
-  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Needed for native USB.
+  //while (!Serial); // Comment out to wait for serial port to connect to Serial Monitor. Option for native USB.
   Serial.println("Custom Color Cycling w/ an RGB LED. This example will cycle through 13 colors.");
   Serial.println(" ");
   Serial.println("Note: Make sure to adjust the code for a common cathode or common anode.");
@@ -130,141 +130,141 @@ void loop()
 #if DEBUG
   Serial.print("RED");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   redON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("ORANGE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   orangeON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("YELLOW");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   yellowON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("CHARTRUESE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   chartrueseON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("GREEN");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   greenON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("SPRING GREEN");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   springGreenON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("CYAN");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   cyanON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("AZURE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   azureON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("BLUE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   blueON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("VIOLET");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   violetON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("MAGENTA");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   magentaON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("ROSE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   roseON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("WHITE");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   whiteON();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 #if DEBUG
   Serial.print("OFF");
   Serial.print(" | Brightness % = ");
-  Serial.println(brightness_LED * 100);
+  Serial.println(brightnessLED * 100);
 #endif
   allOFF();
-  calculate_RGB();
-  show_RGB();
+  rgbCalc();
+  rgbShow();
   delay(blinkRate);
 
 }//end loop
@@ -373,9 +373,9 @@ void whiteON() {
 
 
 
-void calculate_RGB() {
+void rgbCalc() {
   //use this to correctly light up LED depending on the setup
-  if (RGB_type == common_anode) {
+  if (rgbType == commonAnode) {
     /* If using a common anode LED, a pin
        should turn ON the LED when the pin is LOW.*/
     redValue = 255 - redValue;
@@ -392,12 +392,12 @@ void calculate_RGB() {
        Leave RGB values as is, we're good!*/
   }
 
-  redValue = int(redValue * brightness_LED);
-  greenValue = int(greenValue * brightness_LED);
-  blueValue = int(blueValue * brightness_LED);
+  redValue = int(redValue * brightnessLED);
+  greenValue = int(greenValue * brightnessLED);
+  blueValue = int(blueValue * brightnessLED);
 }
 
-void show_RGB() {
+void rgbShow() {
   //once value is calculated, show the LED color
   analogWrite(redPin, redValue);
   analogWrite(greenPin, greenValue);
