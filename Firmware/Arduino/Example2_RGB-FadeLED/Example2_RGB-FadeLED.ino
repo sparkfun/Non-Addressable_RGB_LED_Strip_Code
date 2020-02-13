@@ -1,5 +1,5 @@
 /******************************************************************************
-  rgb-led-fade.ino
+  Example2_RGB-FadeLED.ino
 
   Non-Addressable RGB LED Custom Color Fade
   WRITTEN BY: Ho Yun "Bobby" Chan @ SparkFun Electronics

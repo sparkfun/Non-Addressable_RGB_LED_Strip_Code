@@ -1,5 +1,5 @@
 /******************************************************************************
-  rgb-led-cycle.ino
+  Example1_RGB-CycleLED.ino
 
   Non-Addressable RGB LED Custom Color Cycle
   WRITTEN BY: Ho Yun "Bobby" Chan @ SparkFun Electronics

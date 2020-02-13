@@ -1,5 +1,5 @@
 /******************************************************************************
-  rgb-led-full-demo.ino
+  Example3_RGB-FullDemoLED.ino
 
   Non-Addressable RGB LED Full Demo
   WRITTEN BY: Ho Yun "Bobby" Chan @ SparkFun Electronics
