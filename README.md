@@ -29,18 +29,18 @@ Products That Use This Code
   
 * **Single RGB LEDs**
   * **Common Cathode**
-    * **[COM-09264](https://www.sparkfun.com/products/9264)** - LED - RGB Diffused Common Cathode
-    * **[COM-9852](https://www.sparkfun.com/products/9852)** - LED - RGB Diffused Common Cathode (25 pack)
-    * **[COM-00105](https://www.sparkfun.com/products/105)** - LED - RGB Clear Common Cathode
-    * **[COM-09853](https://www.sparkfun.com/products/09853)** - LED - RGB Clear Common Cathode (25 pack)
+    * **[COM-09264](https://www.sparkfun.com/products/9264)** - LED - RGB 5mm, Diffused Common Cathode
+    * **[COM-9852](https://www.sparkfun.com/products/9852)** - LED - RGB 5mm, Diffused Common Cathode (25 pack)
+    * **[COM-00105](https://www.sparkfun.com/products/105)** - LED - RGB 5mm, Clear Common Cathode
+    * **[COM-09853](https://www.sparkfun.com/products/9853)** - LED - RGB 5mm, Clear Common Cathode (25 pack)
     * **[COM-11120](https://www.sparkfun.com/products/11120)** - Diffused LED - RGB 10mm, Common Cathode
     * **[DEV-13735](https://www.sparkfun.com/products/13735)** - LilyPad RGB LED, Common Cathode
     * **[DEV-13735](https://www.sparkfun.com/products/13735)** - Silk Flower LED, Common Cathode
   * **Common Anode**
-    * **[COM-10820](https://www.sparkfun.com/products/10820)** - LED - RGB Clear Common Anode
-    * **[COM-10819](https://www.sparkfun.com/products/10819)** - LED - RGB Clear Common Anode (25 pack)
-    * **[COM-10821](https://www.sparkfun.com/products/10821)** - LED - RGB Diffused Common Anode
-    * **[COM-10818](https://www.sparkfun.com/products/10818)** - LED - RGB Diffused Common Anode (25 pack)
+    * **[COM-10820](https://www.sparkfun.com/products/10820)** - LED - RGB 5mm, Clear Common Anode
+    * **[COM-10819](https://www.sparkfun.com/products/10819)** - LED - RGB 5mm, Clear Common Anode (25 pack)
+    * **[COM-10821](https://www.sparkfun.com/products/10821)** - LED - RGB 5mm, Diffused Common Anode
+    * **[COM-10818](https://www.sparkfun.com/products/10818)** - LED - RGB 5mm, Diffused Common Anode (25 pack)
   * **Resistors**
     * **[PRT-14490](https://www.sparkfun.com/products/14490)** -  Resistor 330&ohm; 1/4 Watt PTH - 20 pack (Thick Leads), general current limiting resistor for 5V systems
     * **[PRT-14493](https://www.sparkfun.com/products/14493)** -  Resistor 100&ohm; 1/4 Watt PTH - 20 pack (Thick Leads), general current limiting resistor for 3.3V systems
