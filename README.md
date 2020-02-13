@@ -35,7 +35,7 @@ Products That Use This Code
     * **[COM-09853](https://www.sparkfun.com/products/9853)** - LED - RGB 5mm, Clear Common Cathode (25 pack)
     * **[COM-11120](https://www.sparkfun.com/products/11120)** - Diffused LED - RGB 10mm, Common Cathode
     * **[DEV-13735](https://www.sparkfun.com/products/13735)** - LilyPad RGB LED, Common Cathode
-    * **[DEV-13735](https://www.sparkfun.com/products/13735)** - Silk Flower LED, Common Cathode
+    * **[DEV-13270](https://www.sparkfun.com/products/13270)** - Silk Flower LED, Common Cathode
   * **Common Anode**
     * **[COM-10820](https://www.sparkfun.com/products/10820)** - LED - RGB 5mm, Clear Common Anode
     * **[COM-10819](https://www.sparkfun.com/products/10819)** - LED - RGB 5mm, Clear Common Anode (25 pack)
