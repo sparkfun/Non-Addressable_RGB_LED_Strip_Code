@@ -1,7 +1,7 @@
 Non-Addressable RGB LED Strip Code
 ========================================
 
-[![Non-Addressable RGB LED Strip Powered](https://cdn.sparkfun.com/r/600-600/assets/learn_tutorials/7/3/1/Analog-Non-Addressable-RGB_LED_Strip.jpg)](https://cdn.sparkfun.com/assets/learn_tutorials/7/3/1/Analog-Non-Addressable-RGB_LED_Strip.jpg)
+[![Demo of Non-Addressable LED Strip Custom Color Fading](https://cdn.sparkfun.com/assets/learn_tutorials/7/3/1/Non-Addressable_RGB_LED_Strip_Custom_Color_Fading.gif)](https://cdn.sparkfun.com/assets/learn_tutorials/7/3/1/Non-Addressable_RGB_LED_Strip_Custom_Color_Fading.gif)
 
 Example code for analog RGB LED strips. Depending on your setup, you can also use this with an individual common cathode or common anode RGB LED. You can also use this if you have an LED driver to control high power RGB LEDs.
 
